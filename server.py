@@ -37,7 +37,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         headers = []
 
         request_list = request.decode().split()
-        print(request_list)
+        #print(request_list)
         request_command = request_list[0]
         request_dir = request_list[1]
         # If the path ends in "/", we return index.html instead
@@ -75,7 +75,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         for header in headers:
             reply = reply + header
         reply = reply + "\r\n" + content
-        print(reply)
+        #print(reply)
         return reply
 
     def handle(self):
