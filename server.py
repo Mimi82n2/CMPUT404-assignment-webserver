@@ -28,9 +28,6 @@ import os
 
 # try: curl -v -X GET http://127.0.0.1:8080/
 
-
-
-
 class MyWebServer(socketserver.BaseRequestHandler):
 
     def createReply(self, request):
@@ -41,7 +38,6 @@ class MyWebServer(socketserver.BaseRequestHandler):
 
         request_list = request.decode().split()
         print(request_list)
-        print('\n\n\nE')
         request_command = request_list[0]
         request_dir = request_list[1]
         # If the path ends in "/", we return index.html instead
@@ -61,12 +57,10 @@ class MyWebServer(socketserver.BaseRequestHandler):
             if not os.path.abspath(path).startswith(path_www):
                 response_code = "404"
                 response_phrase = "Not Found"
-                print("\n\n@@@@@@@@@@@@@2\n\n\n")
             else:
                 file = open(path, "r")
                 content = file.read()
-                content_len = len(content)
-                headers.append("Content-Type: {}\r\nContent-Length: {}\r\n".format(mimetypes.guess_type(path)[0],content_len))
+                headers.append("Content-Type: {}\r\nContent-Length: {}\r\n".format(mimetypes.guess_type(path)[0],len(content)))
         except FileNotFoundError:
             response_code = "404"
             reason_phrase = "Not Found"
@@ -74,8 +68,6 @@ class MyWebServer(socketserver.BaseRequestHandler):
             response_code = "301"
             reason_phrase = "Moved Permanently"
         
-
-
         #Format our response
         reply = (
             "HTTP/1.1 {} {}\r\n"
@@ -85,8 +77,6 @@ class MyWebServer(socketserver.BaseRequestHandler):
         reply = reply + "\r\n" + content
         print(reply)
         return reply
-
-
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
