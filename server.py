@@ -27,12 +27,31 @@ import socketserver
 # try: curl -v -X GET http://127.0.0.1:8080/
 
 
+def createReply(request):
+    reply = ""
+    request_list = request.decode().split()
+
+    print(request_list)
+    print('\n\n\nE')
+    request_command = request_list[0]
+    request_dir = request_list[1]
+    HTTP_Version = (
+        "HTTP/1.1 200 OK"
+        "Date: Sun, 18 Oct 2012 10:36:20 GMT\r\n"
+
+    )
+
+    reply += HTTP_Version
+    return reply
+
 class MyWebServer(socketserver.BaseRequestHandler):
     
     def handle(self):
         self.data = self.request.recv(1024).strip()
         print ("Got a request of: %s\n" % self.data)
-        self.request.sendall(bytearray("OK",'utf-8'))
+
+        reply = createReply(self.data)
+        self.request.sendall(bytearray(reply,'utf-8'))
 
 if __name__ == "__main__":
     HOST, PORT = "localhost", 8080
