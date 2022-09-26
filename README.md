@@ -1,6 +1,13 @@
 CMPUT404-assignment-webserver
 =============================
 
+Resources Used:  
+ - "How to find the mime type of a file in python"  
+    Comment by: Jonathan Mar 6, 2015  
+    https://stackoverflow.com/questions/43580/how-to-find-the-mime-type-of-a-file-in-python
+ - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing  
+    www.rfc-editor.org/rfc/rfc7230
+
 CMPUT404-assignment-webserver
 
 See requirements.org (plain-text) for a description of the project.
